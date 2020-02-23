@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Paoa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Federant|Federo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./shoppingItems/singleitempage.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+
+    <div class="topnav" id="myTopnav">
+        <a href="./index.html" class="active">Paoa</a>
+        <a href="./cart.html">Cart<span class="cartCount">0</span></a>
+        <a href="./womanspage.html">Woman</a>
+        <a href="./menspage.html">Men</a>
+        <a href="#" class="icon" onclick="navFunction()">&#9776;</a>
+        <!-- href="javascript:void(0);"  -->
+    </div>
+<header class="cartSection">
+</header>
+
+
+<h1 class="cartHeading">SHOPPING CART</h1>
+<div class="products-container">
+    <!-- <div class="product-header">
+        <h5 class="product-title">PRODUCT</h5>
+        <h5 class="price">PRICE</h5>
+        <h5 class="quantity">Quantity</h5>
+        <h5 class="total">TOTAL</h5>
+    </div> -->
+    <div class="products">
+
+    </div>
+
+</div>
+
+
+
+<!-- Modal -->
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+            <form>
+            
+              <div class="row">
+                <div class="col-50">
+                  <h3>Billing Address</h3>
+                  <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+                  <input type="text" id="fname" name="firstname" placeholder="John Doe" required>
+                  <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                  <input type="text" id="email" name="email" placeholder="john@example.com" required>
+                  <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+                  <input type="text" id="adr" name="address" placeholder="Address" required>
+                  <label for="city"><i class="fa fa-institution"></i> City</label>
+                  <input type="text" id="city" name="city" placeholder="City" required>
+      
+                  <div class="row">
+                    <div class="col-50">
+                      <label for="state">State</label>
+                      <input type="text" id="state" name="state" placeholder="State" required>
+                    </div>
+                    <div class="col-50">
+                      <label for="zip">Zip</label>
+                      <input type="text" id="zip" name="zip" placeholder="Zip Code" required>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="col-50">
+                  <h3>Payment</h3>
+                  <label for="cname">Name on Card</label>
+                  <input type="text" id="cname" name="cardname" placeholder="John Doe" required>
+                  <label for="ccnum">Credit card number</label>
+                  <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" required>
+                  <label for="expmonth">Exp Month</label>
+                  <input type="text" id="expmonth" name="expmonth" placeholder="September" required>
+                  <div class="row">
+                    <div class="col-50">
+                      <label for="expyear">Exp Year</label>
+                      <input type="text" id="expyear" name="expyear" placeholder="2025" required>
+                    </div>
+                    <div class="col-50">
+                      <label for="cvv">CVV</label>
+                      <input type="text" id="cvv" name="cvv" placeholder="352" required>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+              <input type="submit" value="PURCHASE" class="btn" id="purchaseBtn">
+            </form>
+      </div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<footer class="footerContainer">
+    <div class="footerCollection footerSec">
+        <h4>Collections</h4>
+        <ul>
+            <li><a>Swim</a></li>
+            <li><a>T-shirts</a></li>
+            <li><a>Dresses</a></li>
+            <li><a>Hoodies</a></li>
+            <li><a>Accesories</a></li>
+            <li><a>Shorts</a></li>
+            <li><a>Pants</a></li>
+        </ul>
+    </div>
+    <div class="footerContact footerSec">
+        <h4>Contact</h4>
+        <ul>
+            <li><span class="footerSpan">Address: </span>1234 Main Street San Diego, California 98765</li>
+            <li><span class="footerSpan">Phone: </span cl>(123) 456-7890</li>
+            <li><span class="footerSpan">Hours: </span>SUN-SAT: 11:00am to 8:00pm</li>
+            <li><span class="footerSpan">E-mail: </span>service@paoa.com</li>
+        </ul>
+    </div>
+    <div class="footerSignup footerSec">
+        <h4>Newsletter Signup</h4>
+        <p>Sign up and you'll be the first to know about our<br> events and sales. You'll also be eligible for <br>special discounts!</p>
+        <form method="post">
+            <input type="email" name="email" id="footerEmail" placeholder="Enter your e-mail">
+            <button type="submit" id="footerBtn" name="button">Sign Me Up!</button>
+        </form>
+        <i class="fab fa-facebook-square"></i>
+        <i class="fab fa-instagram-square"></i>
+        <i class="fab fa-twitter-square"></i>
+
+    </div>
+    
+</footer>
+
+
+
+<script src="./index.js"></script>
+</body>
+</html>
