@@ -1,0 +1,52 @@
+    * {
+        padding: 0px;
+        margin: 0px;
+        box-sizing: border-box;
+        font-family: 'Montserrat', sans-serif;
+}
+.imageForItem {
+    height: 400px;
+    width: 350px;
+    margin-top: 100px;
+}
+
+.itemWhole {
+    display: flex;
+    justify-content: space-evenly;
+    margin:30px;
+    margin-top: 0px;
+}
+.itemDesc {
+    padding-top: 200px;
+    text-align: center;
+}
+.itemDesc h4 {
+    font-size: 30px;
+    color: black;
+    margin: 10px;
+}
+
+.itemDesc button {
+    font-size: 20px;
+    font-weight: 100;
+    color: white;
+    background-color: #15ccf8;
+    padding: 10px;
+    border-radius: 5px;
+    width: 200px;
+    margin: 10px;
+}
+.itemDesc button:hover {
+    cursor: pointer;
+    font-size: 22px;
+}
+.itemPrice {
+    font-size: 20px;
+}
+
+.sizeSelector {
+    margin: 10px;
+    background: #e6e6e6;
+    font-size: 15px;
+    width: 80px;
+}
