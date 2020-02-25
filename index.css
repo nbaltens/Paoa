@@ -289,7 +289,7 @@ header {
 }
 
 .quantity {
-    width: 30%;
+    width: 10%;
     display: flex;
     align-items: center;
 }
@@ -358,7 +358,7 @@ header {
     margin: 5px;
 }
 
-.emptyCart {
+.clearCart {
     background: black;
     color: white;
     padding: 5px;
@@ -434,13 +434,7 @@ header {
 .newItemDir h4 {
  padding:0px;
 }
-
-}
-
-
-
-@media screen and (max-width: 600px) {
-  .topnav.responsive {position: relative;}
+    .topnav.responsive {position: relative;}
   .topnav.responsive .icon {
     position: absolute;
     right: 0;
@@ -461,39 +455,61 @@ header {
 
 }
 
+
+
+
+
 /* CART */
 @media screen and (max-width: 700px) {
     .product {
-        width: 60%;
+        width: 100%;
+    }
+    .itemTitleCart {
+        display: none;
+    }
+    .itemPriceCart {
+        position: relative;
+        right: 20px;
+    }
+    .cartTotal {
+        padding-top: 100px;
+        text-align: center;
+        position: relative;
+        right: 50px;
+    }
+    .products {
+        padding-bottom: 0px;
+    }
+    .checkoutBtn {
+        width: 100%;
     }
 }
 
 
 
-/* The Modal (background) */
+/* Modal */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4); 
   }
   
-  /* Modal Content/Box */
+
   .modal-content {
     background-color: #fefefe;
-    margin: 7% auto; /* 15% from the top and centered */
+    margin: 7% auto; 
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 80%; 
   }
   
-  /* The Close Button */
   .close {
     color: #aaa;
     float: right;
@@ -580,8 +596,6 @@ header {
     background-color: #45a049;
   }
   
- 
-  
   hr {
     border: 1px solid lightgrey;
   }
@@ -591,7 +605,6 @@ header {
     color: grey;
   }
   
-  /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
   @media (max-width: 800px) {
     .row {
       flex-direction: column-reverse;
