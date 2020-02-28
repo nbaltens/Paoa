@@ -13,7 +13,6 @@ function navFunction() {
 
 let carts = document.querySelectorAll('.addToCartBtn');
 
-// Run through all purchase Buttons to add item when clicked
 for(let i = 0; i < carts.length; i++) {
     carts[i].addEventListener('click', () => {
         cartNumbers();
@@ -23,7 +22,6 @@ for(let i = 0; i < carts.length; i++) {
     })
 }
 
-// function to check local storage on each page to see how many items are in cart
 function onLoadCartNumbers() {
     let productNumbers = localStorage.getItem('cartNumbers');
     if(productNumbers) {
@@ -31,7 +29,6 @@ function onLoadCartNumbers() {
     }
 }
 
-// function to add items to local storage and to cart when clicked
 function cartNumbers() {
     let productNumbers = localStorage.getItem('cartNumbers');
     productNumbers = parseInt(productNumbers);
@@ -42,7 +39,31 @@ function cartNumbers() {
         localStorage.setItem('cartNumbers', 1);
         document.querySelector('.cartCount').textContent = 1;
     }
-    
+}
+
+
+function incrementCart() {
+    let productNumbers = localStorage.getItem('cartNumbers');
+    productNumbers = parseInt(productNumbers);
+    localStorage.setItem('cartNumbers', productNumbers + 1);
+    document.querySelector('.cartCount').textContent = productNumbers + 1;
+    let quantityNum = event.target.parentElement.querySelector('.quantityNum')
+    let quantityCalc = event.target.parentElement.querySelector('.quantityNum').textContent;
+    quantityCalc++
+    quantityNum.textContent = quantityCalc 
+
+}
+
+
+function decrementCart() {
+    let productNumbers = localStorage.getItem('cartNumbers');
+    productNumbers = parseInt(productNumbers);
+    localStorage.setItem('cartNumbers', productNumbers - 1);
+    document.querySelector('.cartCount').textContent = productNumbers - 1;
+    let quantityNum = event.target.parentElement.querySelector('.quantityNum')
+    let quantityCalc = event.target.parentElement.querySelector('.quantityNum').textContent;
+    quantityCalc--
+    quantityNum.textContent = quantityCalc  
 }
 
 function setItemInStorage(product) {
@@ -70,6 +91,8 @@ function setItemInStorage(product) {
 function totalCost(product) {
     let cartCost = localStorage.getItem('totalCost');
     let productPrice = parseInt(product.itemprice)
+    console.log(productPrice)
+    console.log(cartCost)
 
 
     if(cartCost != null) {
@@ -80,6 +103,7 @@ function totalCost(product) {
 
     }
 }
+
 
 function displayCart() {
     let cartItems = localStorage.getItem("productsInCart");
@@ -99,9 +123,10 @@ function displayCart() {
                 <div class="product">
                     <div><img class="cart-product-image" src=${item.itemimg}></div>
                     <div class="itemTitleCart">${item.itemtitle}</div>
-                    
                     <div><span>Size: </span>${item.itemsize}</div>
-                <div class="quantity">QTY: ${item.inCart}</div>
+                <div class="quantity"><i class="fas fa-chevron-circle-up upBtn" onClick="incrementCart()"></i><span class="quantityNum" value="${item.inCart}"> ${item.inCart}</span><i class="fas fa-chevron-circle-down downBtn" onClick="decrementCart()"></i></div>
+                
+                
                 <div class="itemPriceCart">$${item.inCart * item.itemprice}</div>
                 
                 </div>
@@ -155,9 +180,9 @@ function addToCart(item) {
 }
 
 
-
 onLoadCartNumbers();
 displayCart();
+
 
 
 // MODAL
@@ -165,6 +190,7 @@ displayCart();
 var modal = document.getElementById("myModal");
 var btn = document.getElementById("myBtn");
 var span = document.getElementsByClassName("close")[0];
+
 btn.onclick = function() {
   modal.style.display = "block";
 }
