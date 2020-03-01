@@ -20,6 +20,7 @@ for(let i = 0; i < carts.length; i++) {
         setItemInStorage(newObj);
         totalCost(newObj);
         
+        
     })
 }
 
@@ -63,16 +64,20 @@ function incrementCart() {
     totalVal = parseInt(totalVal)
     totalVal += cartItemPrice;
     total.textContent = totalVal 
+    localStorage.setItem('totalCost', totalVal);
 }
 
 // decremet cart acording to product count
 function decrementCart() {
+    let quantityNum = event.target.parentElement.querySelector('.quantityNum')
+    let quantityCalc = event.target.parentElement.querySelector('.quantityNum').textContent;
     let productNumbers = localStorage.getItem('cartNumbers');
+    if(quantityNum.textContent == 1) {
+        return;
+    } else {
     productNumbers = parseInt(productNumbers);
     localStorage.setItem('cartNumbers', productNumbers - 1);
     document.querySelector('.cartCount').textContent = productNumbers - 1;
-    let quantityNum = event.target.parentElement.querySelector('.quantityNum')
-    let quantityCalc = event.target.parentElement.querySelector('.quantityNum').textContent;
     quantityCalc--
     quantityNum.textContent = quantityCalc 
     
@@ -82,9 +87,32 @@ function decrementCart() {
     let totalVal = total.textContent
     totalVal = parseInt(totalVal)
     totalVal -= cartItemPrice;
-
     total.textContent = totalVal
+    localStorage.setItem('totalCost', totalVal);
+    }
 }
+
+//  Removes item from cart when X icon is clicked.
+function xIconFunction() {
+    
+    let xIcon = document.querySelectorAll(".cartXIcon");
+    
+    for(let i = 0; i < xIcon.length; i++) {
+        xIcon[i].addEventListener('click', () => {
+            let product = xIcon[i].parentElement;
+
+        let item = xIcon[i].parentElement.querySelector(".tag").innerText;
+        let localProducts = localStorage.getItem("productsInCart");
+        localProducts = JSON.parse(localProducts);
+
+        console.log(item)
+        
+        })
+    }
+
+}
+
+
 // set items as objects in local storage
 function setItemInStorage(product) {
     let cartItems = localStorage.getItem('productsInCart');
@@ -135,9 +163,10 @@ function displayCart() {
         
             productContainer.innerHTML += `
                 <div class="product">
+                <div onclick="xIconFunction()" class="cartXIcon"><i class="far fa-times-circle xIcon"></i></div>
                     <div><img class="cart-product-image" src=${item.itemimg}></div>
-                    <div class="itemTitleCart">${item.itemtitle}</div>
-                    <div><span>Size: </span>${item.itemsize}</div>
+                    <div class="itemTitleCart"><span class="tag">${item.tag}</span>${item.itemtitle}</div>
+                    <div class="cartItemSize"><span>Size: </span>${item.itemsize}</div>
                 <div class="quantity"><i class="fas fa-chevron-circle-up upBtn" onClick="incrementCart()"></i><span class="quantityNum" value="${item.inCart}"> ${item.inCart}</span><i class="fas fa-chevron-circle-down downBtn" onClick="decrementCart()"></i></div>
                 
                 
@@ -174,7 +203,7 @@ function clearCart() {
 function addToCart(item) {
     const wholeItem = item.parentElement.parentElement;
     const itemTitle = wholeItem.getElementsByClassName('title')[0].innerText;
-    const tag = wholeItem.getElementsByClassName('title')[0].innerText;
+    const tag = wholeItem.getElementsByClassName('tag')[0].innerText;
     const itemImg = wholeItem.getElementsByClassName('imageForItem')[0].src;
     const itemPrice = wholeItem.getElementsByClassName('price')[0].innerText;
     const itemSize = wholeItem.getElementsByClassName('sizeSelector')[0].value;
@@ -186,13 +215,12 @@ function addToCart(item) {
             this.itemimg = img;
             this.itemprice = price;
             this.itemsize = size;
-            this.tag = title;
+            this.tag = tag;
             this.inCart = 0;
             
         }
     }
     newObj = new Itemobj(itemTitle, itemImg, itemPrice, itemSize, tag, inCart);
-    console.log(newObj)
     return newObj;
 }
 
