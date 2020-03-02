@@ -81,6 +81,7 @@ function decrementCart() {
     quantityCalc--
     quantityNum.textContent = quantityCalc 
     
+    
     let cartItemPrice = quantityNum.parentElement.parentElement.querySelector(".itemPriceInCart").textContent;
     cartItemPrice = parseInt(cartItemPrice)
     let total = document.querySelector(".basketTotalValue");
@@ -99,18 +100,39 @@ function xIconFunction() {
     
     for(let i = 0; i < xIcon.length; i++) {
         xIcon[i].addEventListener('click', () => {
-            let product = xIcon[i].parentElement;
 
         let item = xIcon[i].parentElement.querySelector(".tag").innerText;
         let localProducts = localStorage.getItem("productsInCart");
         localProducts = JSON.parse(localProducts);
+        delete localProducts[item];
+        localStorage.setItem("productsInCart", JSON.stringify(localProducts));
+        let itemWhole = xIcon[i].parentElement;
+        itemWhole.remove()
 
-        console.log(item)
+
+        let quantityNum = itemWhole.querySelector('.quantityNum').textContent;
+        let productNumbers = localStorage.getItem('cartNumbers');
+        productNumbers = parseInt(productNumbers);
+        quantityNum = parseInt(quantityNum)
+        let cartIcon = document.querySelector('.cartCount');
+        cartIcon.textContent = productNumbers - quantityNum;
+        localStorage.setItem("cartNumbers", cartIcon.textContent )
+
+
+    console.log(hello)
         
+        
+    
+
+
+
+
         })
+        
     }
 
 }
+
 
 
 // set items as objects in local storage
@@ -163,7 +185,7 @@ function displayCart() {
         
             productContainer.innerHTML += `
                 <div class="product">
-                <div onclick="xIconFunction()" class="cartXIcon"><i class="far fa-times-circle xIcon"></i></div>
+                    <div class="cartXIcon"><i class="far fa-times-circle xIcon"></i></div>
                     <div><img class="cart-product-image" src=${item.itemimg}></div>
                     <div class="itemTitleCart"><span class="tag">${item.tag}</span>${item.itemtitle}</div>
                     <div class="cartItemSize"><span>Size: </span>${item.itemsize}</div>
@@ -227,6 +249,7 @@ function addToCart(item) {
 
 onLoadCartNumbers();
 displayCart();
+xIconFunction()
 
 
 
