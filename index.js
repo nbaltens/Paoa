@@ -79,9 +79,7 @@ function decrementCart() {
     localStorage.setItem('cartNumbers', productNumbers - 1);
     document.querySelector('.cartCount').textContent = productNumbers - 1;
     quantityCalc--
-    quantityNum.textContent = quantityCalc 
-    
-    
+    quantityNum.textContent = quantityCalc
     let cartItemPrice = quantityNum.parentElement.parentElement.querySelector(".itemPriceInCart").textContent;
     cartItemPrice = parseInt(cartItemPrice)
     let total = document.querySelector(".basketTotalValue");
@@ -95,12 +93,10 @@ function decrementCart() {
 
 //  Removes item from cart when X icon is clicked.
 function xIconFunction() {
-    
     let xIcon = document.querySelectorAll(".cartXIcon");
-    
     for(let i = 0; i < xIcon.length; i++) {
         xIcon[i].addEventListener('click', () => {
-
+            
         let item = xIcon[i].parentElement.querySelector(".tag").innerText;
         let localProducts = localStorage.getItem("productsInCart");
         localProducts = JSON.parse(localProducts);
@@ -108,8 +104,7 @@ function xIconFunction() {
         localStorage.setItem("productsInCart", JSON.stringify(localProducts));
         let itemWhole = xIcon[i].parentElement;
         itemWhole.remove()
-
-
+            
         let quantityNum = itemWhole.querySelector('.quantityNum').textContent;
         let productNumbers = localStorage.getItem('cartNumbers');
         productNumbers = parseInt(productNumbers);
@@ -117,19 +112,20 @@ function xIconFunction() {
         let cartIcon = document.querySelector('.cartCount');
         cartIcon.textContent = productNumbers - quantityNum;
         localStorage.setItem("cartNumbers", cartIcon.textContent )
+            
+    let cartItemPrice = itemWhole.querySelector(".itemPriceInCart").textContent
+    cartItemPrice *= quantityNum; 
+    cartItemPrice = parseInt(cartItemPrice)
+    let total = document.querySelector(".basketTotalValue");
+    let totalVal = total.textContent
+    totalVal = parseInt(totalVal)
+    totalVal -= cartItemPrice;
+    total.textContent = totalVal 
+    localStorage.setItem('totalCost', totalVal);
 
-
-    console.log(hello)
+    })
         
-        
-    
-
-
-
-
-        })
-        
-    }
+  }
 
 }
 
@@ -200,7 +196,6 @@ function displayCart() {
         });
 
         productContainer.innerHTML += `
-        <button class="clearCart" onClick="clearCart()">Clear Cart</button>
             <div class="cartTotal">
                 <h4 class="basketTotalTitle">
                 TOTAL
@@ -215,11 +210,6 @@ function displayCart() {
 
 }
 
-// clear cart Button function with onclick
-function clearCart() {
-    localStorage.clear()
-    location.reload();
-}
 
 // create object out of item clicked on
 function addToCart(item) {
@@ -255,18 +245,25 @@ xIconFunction()
 
 // MODAL
 
-var modal = document.getElementById("myModal");
-var btn = document.getElementById("myBtn");
-var span = document.getElementsByClassName("close")[0];
+let modal = document.getElementById("myModal");
+let btn = document.getElementById("myBtn");
+let span = document.getElementsByClassName("close")[0];
+let shoppingCartTotal = document.querySelector('.basketTotalValue')
+console.log(shoppingCartTotal)
 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-span.onclick = function() {
-  modal.style.display = "none";
-}
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
+    btn.onclick = () => {
+        if(shoppingCartTotal.textContent == 0) {
+            alert("No Items In Cart")
+        } else {
+            modal.style.display = "block";
+        }
+      }
+      span.onclick = () => {
+        modal.style.display = "none";
+      }
+      window.onclick = (event) => {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+
