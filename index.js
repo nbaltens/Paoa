@@ -26,7 +26,7 @@ for(let i = 0; i < carts.length; i++) {
 
 // set cart count for cart icon
 function onLoadCartNumbers() {
-    let productNumbers = localStorage.getItem('cartNumbers');
+    let productNumbers = sessionStorage.getItem('cartNumbers');
     if(productNumbers) {
         document.querySelector('.cartCount').textContent = productNumbers;
     }
@@ -34,13 +34,13 @@ function onLoadCartNumbers() {
 }
 // set cart count and local storage count
 function cartNumbers() {
-    let productNumbers = localStorage.getItem('cartNumbers');
+    let productNumbers = sessionStorage.getItem('cartNumbers');
     productNumbers = parseInt(productNumbers);
     if(productNumbers) {
-        localStorage.setItem('cartNumbers', productNumbers + 1);
+        sessionStorage.setItem('cartNumbers', productNumbers + 1);
         document.querySelector('.cartCount').textContent = productNumbers + 1;
     } else {
-        localStorage.setItem('cartNumbers', 1);
+        sessionStorage.setItem('cartNumbers', 1);
         document.querySelector('.cartCount').textContent = 1;
     }
 }
@@ -48,9 +48,9 @@ function cartNumbers() {
 // increment cart acording to product count
 
 function incrementCart() {
-    let productNumbers = localStorage.getItem('cartNumbers');
+    let productNumbers = sessionStorage.getItem('cartNumbers');
     productNumbers = parseInt(productNumbers);
-    localStorage.setItem('cartNumbers', productNumbers + 1);
+    sessionStorage.setItem('cartNumbers', productNumbers + 1);
     document.querySelector('.cartCount').textContent = productNumbers + 1;
     let quantityNum = event.target.parentElement.querySelector('.quantityNum')
     let quantityCalc = event.target.parentElement.querySelector('.quantityNum').textContent;
@@ -64,22 +64,24 @@ function incrementCart() {
     totalVal = parseInt(totalVal)
     totalVal += cartItemPrice;
     total.textContent = totalVal 
-    localStorage.setItem('totalCost', totalVal);
+    sessionStorage.setItem('totalCost', totalVal);
 }
 
 // decremet cart acording to product count
 function decrementCart() {
     let quantityNum = event.target.parentElement.querySelector('.quantityNum')
     let quantityCalc = event.target.parentElement.querySelector('.quantityNum').textContent;
-    let productNumbers = localStorage.getItem('cartNumbers');
+    let productNumbers = sessionStorage.getItem('cartNumbers');
     if(quantityNum.textContent == 1) {
         return;
     } else {
     productNumbers = parseInt(productNumbers);
-    localStorage.setItem('cartNumbers', productNumbers - 1);
+    sessionStorage.setItem('cartNumbers', productNumbers - 1);
     document.querySelector('.cartCount').textContent = productNumbers - 1;
     quantityCalc--
-    quantityNum.textContent = quantityCalc
+    quantityNum.textContent = quantityCalc 
+
+    
     let cartItemPrice = quantityNum.parentElement.parentElement.querySelector(".itemPriceInCart").textContent;
     cartItemPrice = parseInt(cartItemPrice)
     let total = document.querySelector(".basketTotalValue");
@@ -87,32 +89,36 @@ function decrementCart() {
     totalVal = parseInt(totalVal)
     totalVal -= cartItemPrice;
     total.textContent = totalVal
-    localStorage.setItem('totalCost', totalVal);
+    sessionStorage.setItem('totalCost', totalVal);
     }
 }
 
 //  Removes item from cart when X icon is clicked.
 function xIconFunction() {
+    
     let xIcon = document.querySelectorAll(".cartXIcon");
+    
     for(let i = 0; i < xIcon.length; i++) {
         xIcon[i].addEventListener('click', () => {
-            
+
         let item = xIcon[i].parentElement.querySelector(".tag").innerText;
-        let localProducts = localStorage.getItem("productsInCart");
+        let localProducts = sessionStorage.getItem("productsInCart");
         localProducts = JSON.parse(localProducts);
         delete localProducts[item];
-        localStorage.setItem("productsInCart", JSON.stringify(localProducts));
+        sessionStorage.setItem("productsInCart", JSON.stringify(localProducts));
         let itemWhole = xIcon[i].parentElement;
         itemWhole.remove()
-            
+
+
         let quantityNum = itemWhole.querySelector('.quantityNum').textContent;
-        let productNumbers = localStorage.getItem('cartNumbers');
+        let productNumbers = sessionStorage.getItem('cartNumbers');
         productNumbers = parseInt(productNumbers);
         quantityNum = parseInt(quantityNum)
         let cartIcon = document.querySelector('.cartCount');
         cartIcon.textContent = productNumbers - quantityNum;
-        localStorage.setItem("cartNumbers", cartIcon.textContent )
+        sessionStorage.setItem("cartNumbers", cartIcon.textContent )
             
+
     let cartItemPrice = itemWhole.querySelector(".itemPriceInCart").textContent
     cartItemPrice *= quantityNum; 
     cartItemPrice = parseInt(cartItemPrice)
@@ -121,11 +127,12 @@ function xIconFunction() {
     totalVal = parseInt(totalVal)
     totalVal -= cartItemPrice;
     total.textContent = totalVal 
-    localStorage.setItem('totalCost', totalVal);
+    sessionStorage.setItem('totalCost', totalVal);
 
-    })
+
+        })
         
-  }
+    }
 
 }
 
@@ -133,7 +140,7 @@ function xIconFunction() {
 
 // set items as objects in local storage
 function setItemInStorage(product) {
-    let cartItems = localStorage.getItem('productsInCart');
+    let cartItems = sessionStorage.getItem('productsInCart');
     cartItems = JSON.parse(cartItems);
         if(cartItems != null){
             if(cartItems[product.tag] == undefined) {
@@ -149,29 +156,29 @@ function setItemInStorage(product) {
             [product.tag]: product
         }
     }
-    localStorage.setItem('productsInCart', JSON.stringify(cartItems));   
+    sessionStorage.setItem('productsInCart', JSON.stringify(cartItems));   
     
 }
 
 // set total cost in local storage
 function totalCost(product) {
-    let cartCost = localStorage.getItem('totalCost');
+    let cartCost = sessionStorage.getItem('totalCost');
     let productPrice = parseInt(product.itemprice)
     if(cartCost != null) {
         cartCost = parseInt(cartCost);
-        localStorage.setItem("totalCost", cartCost + productPrice)
+        sessionStorage.setItem("totalCost", cartCost + productPrice)
     } else {
-        localStorage.setItem("totalCost", product.itemprice);
+        sessionStorage.setItem("totalCost", product.itemprice);
     }
 }
 
 // display what is in local storage on Cart HTML page
 function displayCart() {
-    let cartItems = localStorage.getItem("productsInCart");
+    let cartItems = sessionStorage.getItem("productsInCart");
     cartItems = JSON.parse(cartItems);
 
     let productContainer = document.querySelector(".products");
-    let cartCost = localStorage.getItem('totalCost');
+    let cartCost = sessionStorage.getItem('totalCost');
  
     if(cartItems && productContainer) {
 
